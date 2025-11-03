@@ -6,124 +6,441 @@
     <title>J.Gecko 분양 리스트</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <!-- Swiper.js 슬라이더 CSS 링크 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
+    
     <style>
         :root {
-            --swiper-navigation-color: #fff;
-            --swiper-pagination-color: #fff;
-            --swiper-navigation-size: 30px;
+            --primary-color: #2c5f2d;
+            --secondary-color: #97bf0d;
+            --accent-color: #ff6b35;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
-        /* 기본 스타일 */
-        body {
-            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            flex: 1 1 300px; /* PC에서 1:2 비율로, 최소 300px 너비 */
-            margin-right: 30px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        /* --- Swiper 슬라이더 스타일 --- */
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9f0e9 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a3a1b 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 20px;
+        }
+
+        .gecko-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gecko-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (min-width: 768px) {
+            .gecko-card {
+                flex-direction: row;
+            }
+        }
+
+        .gecko-image {
+            flex: 1;
+            min-height: 400px;
+            position: relative;
+        }
+
         .swiper {
             width: 100%;
             height: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
+
         .swiper-slide {
-            text-align: center;
-            font-size: 18px;
-            background: #eee;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: #f0f0f0;
         }
+
         .swiper-slide img {
-            display: block;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 8px;
         }
-        /* --- Swiper 슬라이더 스타일 끝 --- */
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: white;
+            background: rgba(44, 95, 45, 0.7);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 20px;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--secondary-color);
+        }
 
         .gecko-info {
-            flex: 2 1 400px; /* PC에서 1:2 비율로, 최소 400px 너비 */
+            flex: 1;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-            <!-- 개체 1 시작 -->
-            <section class="gecko-card">
-                <div class="gecko-image">
-                    <!-- Swiper -->
-                    <div class="swiper gecko-swiper">
-                        <div class="swiper-wrapper">
-                            <!-- 여기에 개체 사진들을 추가하세요 -->
-                            <div class="swiper-slide"><img src="https://via.placeholder.com/400x300.png?text=Gecko+Image+1" alt="N453 사진 1"></div>
-                            <div class="swiper-slide"><img src="https://via.placeholder.com/400x300.png?text=Gecko+Image+2" alt="N453 사진 2"></div>
-                            <div class="swiper-slide"><img src="https://via.placeholder.com/400x300.png?text=Gecko+Image+3" alt="N453 사진 3"></div>
-                        </div>
-                        <!-- 좌우 화살표 -->
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                        <!-- 페이지네이션 (점) -->
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
-                <div class="gecko-info">
-                    <h2>N453: 블러드 만다린</h2>
-                    <p class="description">붉은 발색이 매력적인 블러드 만다린 개체입니다. 건강하고 활발합니다.</p>
-                    <ul class="info-list">
-                        <li><strong>개체 코드:</strong> N453</li>
-                        <li><strong>해칭일:</strong> 2025-04-15</li>
-                        <li><strong>성별:</strong> Female</li>
-                        <!-- 부모 개체 사진 링크를 여기에 넣으세요 -->
-                        <li><strong>부 (Sire):</strong> <a href="부모_사진_URL_입력" target="_blank">텐저린 이그리마</a></li>
-                        <li><strong>모 (Dam):</strong> <a href="부모_사진_URL_입력" target="_blank">블러드 만다린</a></li>
-                    </ul>
-                    <div class="price-section">
-                        <span class="original-price">250,000원</span>
-            <!-- 예시 개체 2 시작 -->
-            <section class="gecko-card">
-                <div class="gecko-image">
-                    <div class="swiper gecko-swiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="https://via.placeholder.com/400x300.png?text=Another+Gecko" alt="S210 사진 1"></div>
-                        </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
-                <div class="gecko-info">
-                    <h2>S210: 팬텀 이클립스</h2>
-                    <p class="description">오묘한 회색빛과 아름다운 눈을 가진 팬텀 이클립스입니다. 먹이 반응이 좋습니다.</p>
-                    <ul class="info-list">
-                        <li><strong>개체 코드:</strong> S210</li>
-                        <li><strong>해칭일:</strong> 2025-05-01</li>
-                        <li><strong>성별:</strong> Male</li>
-                        <li><strong>부 (Sire):</strong> <a href="#" target="_blank">팬텀</a></li>
-                        <li><strong>모 (Dam):</strong> <a href="#" target="_blank">이클립스</a></li>            <p>&copy; 2025 J.Gecko. All rights reserved.</p>
-        </footer>
+
+        .gecko-info h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .status-badge.sold {
+            background: #e53e3e;
+        }
+
+        .description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .info-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .info-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-list strong {
+            color: var(--primary-color);
+            min-width: 110px;
+            font-weight: 500;
+        }
+
+        .info-list a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .info-list a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        .price-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: 12px;
+            margin-top: auto;
+        }
+
+        .original-price {
+            color: #a0aec0;
+            text-decoration: line-through;
+            font-size: 1.1rem;
+        }
+
+        .sale-price {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .discount-badge {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .gecko-info {
+                padding: 1.5rem;
+            }
+
+            .gecko-info h2 {
+                font-size: 1.5rem;
+            }
+
+            .gecko-image {
+                min-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>🦎 J.Gecko</h1>
+            <p class="subtitle">프리미엄 레오파드 게코 전문 브리더</p>
+        </div>
+    </header>
+
+    <div class="container" id="geckoContainer">
+        <!-- 여기에 자동으로 카드가 생성됩니다 -->
     </div>
 
-    <!-- Swiper.js 슬라이더 JS 링크 -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <footer>
+        <p>&copy; 2025 J.Gecko. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">문의: contact@jgecko.com | Tel: 010-XXXX-XXXX</p>
+    </footer>
 
-    <!-- Swiper 초기화 스크립트 -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        const swiper = new Swiper('.gecko-swiper', {
-            // 페이지네이션 (점)
-            pagination: {
-                el: '.swiper-pagination',
+        // ============================================
+        // 여기에 개체 정보만 추가하면 됩니다!
+        // ============================================
+        const geckos = [
+            {
+                id: 'N453',
+                name: '블러드 만다린',
+                description: '붉은 발색이 매력적인 블러드 만다린 개체입니다. 건강하고 활발하며, 먹이 반응이 우수합니다. 초보자도 키우기 쉬운 온순한 성격을 가지고 있습니다.',
+                hatchDate: '2025-04-15',
+                gender: 'Female (암컷)',
+                sire: { name: '텐저린 이그리마', url: '#' },
+                dam: { name: '블러드 만다린', url: '#' },
+                originalPrice: 250000,
+                salePrice: 220000,
+                status: 'available', // available 또는 sold
+                images: [
+                    'https://via.placeholder.com/600x400/ff8c69/ffffff?text=Blood+Tangerine+1',
+                    'https://via.placeholder.com/600x400/ff7f50/ffffff?text=Blood+Tangerine+2',
+                    'https://via.placeholder.com/600x400/ff6b47/ffffff?text=Blood+Tangerine+3'
+                ]
             },
-            // 좌우 화살표
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+            {
+                id: 'S210',
+                name: '팬텀 이클립스',
+                description: '오묘한 회색빛과 아름다운 이클립스 눈을 가진 팬텀 개체입니다. 먹이 반응이 좋고 핸들링에도 잘 적응하는 개체로, 컬렉터들에게 인기가 많은 모프입니다.',
+                hatchDate: '2025-05-01',
+                gender: 'Male (수컷)',
+                sire: { name: '팬텀', url: '#' },
+                dam: { name: '이클립스', url: '#' },
+                salePrice: 280000,
+                status: 'available',
+                images: [
+                    'https://via.placeholder.com/600x400/8b9dc3/ffffff?text=Phantom+Eclipse+1',
+                    'https://via.placeholder.com/600x400/7a8db5/ffffff?text=Phantom+Eclipse+2'
+                ]
             },
+            {
+                id: 'T789',
+                name: '슈퍼 맥 스노우',
+                description: '순백의 아름다움을 자랑하는 슈퍼 맥 스노우 개체입니다. 화이트아웃에 가까운 발색과 진한 보라빛 눈이 매력적입니다.',
+                hatchDate: '2025-03-20',
+                gender: 'Female (암컷)',
+                sire: { name: '맥 스노우', url: '#' },
+                dam: { name: '슈퍼 맥', url: '#' },
+                originalPrice: 320000,
+                salePrice: 280000,
+                status: 'sold',
+                images: [
+                    'https://via.placeholder.com/600x400/e8e8e8/666666?text=Super+Mack+Snow+1',
+                    'https://via.placeholder.com/600x400/f5f5f5/666666?text=Super+Mack+Snow+2'
+                ]
+            },
+            {
+                id: 'R456',
+                name: '엠버 알비노',
+                description: '황금빛 발색이 돋보이는 엠버 알비노 개체입니다. 온순한 성격과 안정적인 먹이 반응으로 초보자에게 추천합니다.',
+                hatchDate: '2025-06-10',
+                gender: 'Male (수컷)',
+                sire: { name: '벨 알비노', url: '#' },
+                dam: { name: '텐저린', url: '#' },
+                salePrice: 190000,
+                status: 'available',
+                images: [
+                    'https://via.placeholder.com/600x400/ffd700/ffffff?text=Amber+Albino+1'
+                ]
+            }
+        ];
+
+        // ============================================
+        // 아래 코드는 수정하지 않아도 됩니다
+        // ============================================
+        function formatPrice(price) {
+            return price.toLocaleString('ko-KR') + '원';
+        }
+
+        function calculateDiscount(original, sale) {
+            return Math.round(((original - sale) / original) * 100);
+        }
+
+        function createGeckoCard(gecko) {
+            const discountPercent = gecko.originalPrice ? calculateDiscount(gecko.originalPrice, gecko.salePrice) : 0;
+            
+            const imagesHTML = gecko.images.map((img, idx) => 
+                `<div class="swiper-slide">
+                    <img src="${img}" alt="${gecko.id} 사진 ${idx + 1}">
+                </div>`
+            ).join('');
+
+            const priceHTML = gecko.originalPrice 
+                ? `<span class="original-price">${formatPrice(gecko.originalPrice)}</span>
+                   <span class="sale-price">${formatPrice(gecko.salePrice)}</span>
+                   <span class="discount-badge">${discountPercent}% 할인</span>`
+                : `<span class="sale-price">${formatPrice(gecko.salePrice)}</span>`;
+
+            return `
+                <section class="gecko-card">
+                    <div class="gecko-image">
+                        <div class="swiper gecko-swiper-${gecko.id}">
+                            <div class="swiper-wrapper">
+                                ${imagesHTML}
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                    <div class="gecko-info">
+                        <div>
+                            <h2>${gecko.id}: ${gecko.name}</h2>
+                            <span class="status-badge ${gecko.status === 'sold' ? 'sold' : ''}">
+                                ${gecko.status === 'sold' ? '분양 완료' : '분양 가능'}
+                            </span>
+                            <p class="description">${gecko.description}</p>
+                            <ul class="info-list">
+                                <li><strong>개체 코드:</strong> ${gecko.id}</li>
+                                <li><strong>해칭일:</strong> ${gecko.hatchDate}</li>
+                                <li><strong>성별:</strong> ${gecko.gender}</li>
+                                <li><strong>부 (Sire):</strong> <a href="${gecko.sire.url}" target="_blank">${gecko.sire.name}</a></li>
+                                <li><strong>모 (Dam):</strong> <a href="${gecko.dam.url}" target="_blank">${gecko.dam.name}</a></li>
+                            </ul>
+                        </div>
+                        <div class="price-section">
+                            ${priceHTML}
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        // 페이지 로드시 카드 생성
+        const container = document.getElementById('geckoContainer');
+        geckos.forEach(gecko => {
+            container.innerHTML += createGeckoCard(gecko);
+        });
+
+        // Swiper 초기화
+        geckos.forEach(gecko => {
+            new Swiper(`.gecko-swiper-${gecko.id}`, {
+                loop: gecko.images.length > 1,
+                autoplay: gecko.images.length > 1 ? {
+                    delay: 3500,
+                    disableOnInteraction: false,
+                } : false,
+                pagination: {
+                    el: `.gecko-swiper-${gecko.id} .swiper-pagination`,
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: `.gecko-swiper-${gecko.id} .swiper-button-next`,
+                    prevEl: `.gecko-swiper-${gecko.id} .swiper-button-prev`,
+                },
+            });
         });
     </script>
 </body>
 </html>
-
