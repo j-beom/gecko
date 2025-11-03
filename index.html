@@ -7,234 +7,123 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Swiper.js 슬라이더 CSS 링크 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <style>
+        :root {
+            --swiper-navigation-color: #fff;
+            --swiper-pagination-color: #fff;
+            --swiper-navigation-size: 30px;
+        }
+
         /* 기본 스타일 */
         body {
             font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 25px;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-        }
-        /* 헤더 (제목 부분) */
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 25px;
-        }
-        header h1 {
-            margin: 0;
-            color: #2c3e50;
-            font-size: 2.5em;
-            font-weight: 700;
-        }
-        .contact-info {
-            margin-top: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px 25px;
-        }
-        .contact-info a {
-            color: #3498db;
-            text-decoration: none;
-            font-size: 1em;
-            transition: color 0.2s;
-        }
-        .contact-info a:hover {
-            color: #2980b9;
-        }
-        .contact-info span {
-            color: #555;
-        }
-        /* 개체 카드 스타일 */
-        .gecko-card {
-            display: flex;
-            flex-wrap: wrap; /* 화면이 좁아지면 자동으로 줄바꿈 */
-            margin-bottom: 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid #eee;
-        }
-        .gecko-card:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        .gecko-image {
             flex: 1 1 300px; /* PC에서 1:2 비율로, 최소 300px 너비 */
             margin-right: 30px;
         }
-        .gecko-image img {
+        
+        /* --- Swiper 슬라이더 스타일 --- */
+        .swiper {
             width: 100%;
-            height: auto;
+            height: 100%;
             border-radius: 8px;
-            object-fit: cover;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
         }
-        .gecko-image img:hover {
-            transform: scale(1.03);
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        /* --- Swiper 슬라이더 스타일 끝 --- */
+
         .gecko-info {
             flex: 2 1 400px; /* PC에서 1:2 비율로, 최소 400px 너비 */
         }
-        .gecko-info h2 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            color: #3498db;
-            font-size: 1.8em;
-            font-weight: 700;
-        }
-        .gecko-info .description {
-            font-style: italic;
-            color: #555;
-            margin-top: 0;
-            margin-bottom: 20px;
-        }
-        .info-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        .info-list li {
-            background: #ecf0f1;
-            margin-bottom: 8px;
-            padding: 12px 15px;
-            border-radius: 5px;
-            display: flex;
-            font-size: 0.95em;
-        }
-        .info-list li strong {
-            flex-basis: 120px; /* 항목 이름의 너비 고정 */
-            color: #2c3e50;
-            font-weight: 500;
-        }
-        .info-list li a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .info-list li a:hover {
-            text-decoration: underline;
-        }
-        .price-section {
-            margin-top: 25px;
-            text-align: right;
-        }
-        .original-price {
-            font-size: 1.1em;
-            color: #95a5a6;
-            text-decoration: line-through;
-            margin-right: 10px;
-        }
-        .sale-price {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: #e74c3c;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #95a5a6;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-        /* 모바일 반응형: 화면 너비가 768px 이하일 때 적용 */
-        @media (max-width: 768px) {
-            body { padding: 15px; }
-            .container { padding: 20px; }
-            .gecko-card {
-                flex-direction: column; /* 세로로 쌓이도록 변경 */
-            }
-            .gecko-image {
-                margin-right: 0;
-                margin-bottom: 20px;
-            }
-            header h1 { font-size: 2em; }
-            .gecko-info h2 { font-size: 1.5em; }
-            .price-section { text-align: left; margin-top: 20px; }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <header>
-            <h1>J.Gecko</h1>
-            <div class="contact-info">
-                <span>📞 문의: 010-4569-3787</span>
-                <span>📍 위치: 서울시 강남구 테헤란로</span>
-                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">📷 인스타그램</a>
-                <a href="https://fiddle.jshell.net/" target="_blank" rel="noopener noreferrer">🌐 피들 사이트</a>
-            </div>
-        </header>
-
-        <main>
             <!-- 개체 1 시작 -->
             <section class="gecko-card">
                 <div class="gecko-image">
-                    <img src="https://via.placeholder.com/400x300.png?text=Gecko+Image+1" alt="N453 사진">
+                    <!-- Swiper -->
+                    <div class="swiper gecko-swiper">
+                        <div class="swiper-wrapper">
+                            <!-- 여기에 개체 사진들을 추가하세요 -->
+                            <div class="swiper-slide"><img src="https://via.placeholder.com/400x300.png?text=Gecko+Image+1" alt="N453 사진 1"></div>
+                            <div class="swiper-slide"><img src="https://via.placeholder.com/400x300.png?text=Gecko+Image+2" alt="N453 사진 2"></div>
+                            <div class="swiper-slide"><img src="https://via.placeholder.com/400x300.png?text=Gecko+Image+3" alt="N453 사진 3"></div>
+                        </div>
+                        <!-- 좌우 화살표 -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <!-- 페이지네이션 (점) -->
+                        <div class="swiper-pagination"></div>
+                    </div>
                 </div>
                 <div class="gecko-info">
                     <h2>N453: 블러드 만다린</h2>
                     <p class="description">붉은 발색이 매력적인 블러드 만다린 개체입니다. 건강하고 활발합니다.</p>
                     <ul class="info-list">
                         <li><strong>개체 코드:</strong> N453</li>
-                        <li><strong>해칭일:</strong> 2025.04.15</li>
+                        <li><strong>해칭일:</strong> 2025-04-15</li>
                         <li><strong>성별:</strong> Female</li>
-                        <!-- 부모 정보에 이미지 파일이나 다른 페이지 링크를 걸 수 있습니다. -->
-                        <li><strong>부모 정보:</strong> <a href="#" target="_blank">텐저린 이그리마 x 블러드 만다린</a></li>
+                        <!-- 부모 개체 사진 링크를 여기에 넣으세요 -->
+                        <li><strong>부 (Sire):</strong> <a href="부모_사진_URL_입력" target="_blank">텐저린 이그리마</a></li>
+                        <li><strong>모 (Dam):</strong> <a href="부모_사진_URL_입력" target="_blank">블러드 만다린</a></li>
                     </ul>
                     <div class="price-section">
                         <span class="original-price">250,000원</span>
-                        <span class="sale-price">200,000원</span>
-                    </div>
-                </div>
-            </section>
-            <!-- 개체 1 끝 -->
-
-            <!-- 개체 2 시작 -->
+            <!-- 예시 개체 2 시작 -->
             <section class="gecko-card">
                 <div class="gecko-image">
-                    <img src="https://via.placeholder.com/400x300.png?text=Gecko+Image+2" alt="S210 사진">
+                    <div class="swiper gecko-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="https://via.placeholder.com/400x300.png?text=Another+Gecko" alt="S210 사진 1"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
                 </div>
                 <div class="gecko-info">
                     <h2>S210: 팬텀 이클립스</h2>
                     <p class="description">오묘한 회색빛과 아름다운 눈을 가진 팬텀 이클립스입니다. 먹이 반응이 좋습니다.</p>
                     <ul class="info-list">
                         <li><strong>개체 코드:</strong> S210</li>
-                        <li><strong>해칭일:</strong> 2025.05.01</li>
-                        <li><strong>성별:</strong> Male (추정)</li>
-                        <li><strong>부모 정보:</strong> <a href="#" target="_blank">팬텀 x 이클립스</a></li>
-                    </ul>
-                    <div class="price-section">
-                        <span class="original-price">400,000원</span>
-                        <span class="sale-price">350,000원</span>
-                    </div>
-                </div>
-            </section>
-            <!-- 개체 2 끝 -->
-
-            <!-- 여기에 새로운 개체를 추가하려면 위 '개체 시작/끝' 섹션을 복사해서 붙여넣고 내용만 수정하세요. -->
-
-        </main>
-
-        <footer>
-            <p>&copy; 2025 J.Gecko. All rights reserved.</p>
+                        <li><strong>해칭일:</strong> 2025-05-01</li>
+                        <li><strong>성별:</strong> Male</li>
+                        <li><strong>부 (Sire):</strong> <a href="#" target="_blank">팬텀</a></li>
+                        <li><strong>모 (Dam):</strong> <a href="#" target="_blank">이클립스</a></li>            <p>&copy; 2025 J.Gecko. All rights reserved.</p>
         </footer>
     </div>
 
+    <!-- Swiper.js 슬라이더 JS 링크 -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Swiper 초기화 스크립트 -->
+    <script>
+        const swiper = new Swiper('.gecko-swiper', {
+            // 페이지네이션 (점)
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            // 좌우 화살표
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
 </body>
 </html>
 
