@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="크레스티드 게코 분양 - 최고 품질의 크레스티드 게코를 만나보세요">
+    <meta name="keywords" content="크레스티드 게코, 게코 분양, Crested Gecko, 파충류">
+    <meta property="og:title" content="크레스티드 게코 분양">
+    <meta property="og:description" content="프리미엄 크레스티드 게코 분양 전문">
+    <meta property="og:type" content="website">
+    <title>크레스티드 게코 분양 | Crested Gecko Shop</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>🦎 <span data-i18n="siteName">크레스티드 게코 분양</span></h1>
+                </div>
+                <nav class="nav">
+                    <button class="lang-toggle" id="langToggle">
+                        <span class="lang-icon">🌐</span>
+                        <span id="currentLang">KO</span>
+                    </button>
+                    <a href="breeders.html" class="nav-link" data-i18n="breeders">브리더 정보</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2 class="hero-title" data-i18n="heroTitle">프리미엄 크레스티드 게코</h2>
+            <p class="hero-subtitle" data-i18n="heroSubtitle">최고 품질의 유전자를 가진 건강한 개체를 만나보세요</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filters">
+        <div class="container">
+            <div class="filters-header">
+                <h3 data-i18n="filters">필터</h3>
+                <button class="btn-reset" id="resetFilters" data-i18n="resetFilters">초기화</button>
+            </div>
+
+            <!-- Search -->
+            <div class="filter-group">
+                <label data-i18n="search">검색</label>
+                <input type="text" id="searchInput" placeholder="이름으로 검색..." data-i18n-placeholder="searchPlaceholder">
+            </div>
+
+            <!-- Genetics Filter -->
+            <div class="filter-group">
+                <label data-i18n="genetics">유전자</label>
+                <div class="filter-pills" id="geneticsFilter">
+                    <!-- Generated dynamically -->
+                </div>
+            </div>
+
+            <!-- Sex Filter -->
+            <div class="filter-group">
+                <label data-i18n="sex">성별</label>
+                <div class="filter-pills" id="sexFilter">
+                    <!-- Generated dynamically -->
+                </div>
+            </div>
+
+            <!-- Size Filter -->
+            <div class="filter-group">
+                <label data-i18n="size">크기</label>
+                <div class="filter-pills" id="sizeFilter">
+                    <!-- Generated dynamically -->
+                </div>
+            </div>
+
+            <!-- Sort -->
+            <div class="filter-group">
+                <label data-i18n="sortBy">정렬</label>
+                <select id="sortSelect" class="sort-select">
+                    <option value="newest" data-i18n="sortNewest">최신순</option>
+                    <option value="oldest" data-i18n="sortOldest">오래된순</option>
+                    <option value="priceHigh" data-i18n="sortPriceHigh">가격 높은순</option>
+                    <option value="priceLow" data-i18n="sortPriceLow">가격 낮은순</option>
+                    <option value="name" data-i18n="sortName">이름순</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Counter -->
+    <section class="results">
+        <div class="container">
+            <p class="results-text">
+                <span data-i18n="showing">표시 중:</span> 
+                <strong id="resultCount">0</strong> 
+                <span data-i18n="geckos">개체</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- Gecko Cards -->
+    <section class="gallery">
+        <div class="container">
+            <div class="cards-grid" id="geckoGrid">
+                <!-- Generated dynamically -->
+            </div>
+            <div class="no-results" id="noResults" style="display: none;">
+                <p data-i18n="noResults">검색 결과가 없습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breeder Modal -->
+    <div class="modal" id="breederModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div id="breederInfo">
+                <!-- Generated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-overlay"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">&times;</button>
+            <button class="lightbox-prev" id="lightboxPrev">‹</button>
+            <img src="" alt="" id="lightboxImage">
+            <button class="lightbox-next" id="lightboxNext">›</button>
+            <div class="lightbox-counter" id="lightboxCounter"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 <span data-i18n="siteName">크레스티드 게코 분양</span>. All rights reserved.</p>
+            <p class="footer-note" data-i18n="footerNote">모든 개체는 건강하고 검역된 상태로 분양됩니다.</p>
+        </div>
+    </footer>
+
+    <!-- Loading Indicator -->
+    <div class="loading" id="loading" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/breeders.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
